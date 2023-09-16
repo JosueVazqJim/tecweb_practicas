@@ -113,43 +113,47 @@
 
     <form action="index.php" method="get">
         Numero: <input type="text" name="numero"><br>
-        <input type="submit">
+        <input type="submit" name="e3">
     </form>
-
     <?php 
-        $num = $_GET["numero"];
-        $bandera = false;
-        $numeroAleatorio = null;
+        if (isset($_POST['e3'])) {
+            $num = $_GET["numero"];
+            $bandera = false;
+            $numeroAleatorio = null;
 
-        while(!$bandera){
-            $numeroAleatorio = rand(0, 1000);
+            while(!$bandera){
+                $numeroAleatorio = rand(0, 1000);
 
-            // Verificar si el número aleatorio es múltiplo del número dado
-            if ($numeroAleatorio % $num == 0) {
-                $bandera = true;
+                // Verificar si el número aleatorio es múltiplo del número dado
+                if ($numeroAleatorio % $num == 0) {
+                    $bandera = true;
+                }
             }
+            echo "El primer múltiplo de $num obtenido aleatoriamente es: $numeroAleatorio";
+            unset($num, $bandera, $numeroAleatorio);
         }
-        echo "El primer múltiplo de $num obtenido aleatoriamente es: $numeroAleatorio";
-        unset($num, $bandera, $numeroAleatorio);
     ?>
 
     <h4>Variante con do-while</h4>
     <?php 
-        $num = $_GET["numero"];
-        $bandera = false;
-        $numeroAleatorio = null;
+        if (isset($_POST['e3'])) {
+            $num = $_GET["numero"];
+            $bandera = false;
+            $numeroAleatorio = null;
 
-        do {
-            $numeroAleatorio = rand(0, 1000);
-        
-            // Verificar si el número aleatorio es múltiplo del número dado
-            if ($numeroAleatorio % $num == 0) {
-                $bandera = true;
-            }
-        } while (!$bandera);
-        echo "El primer múltiplo de $num obtenido aleatoriamente es: $numeroAleatorio";
-        unset($num, $bandera, $numeroAleatorio);
+            do {
+                $numeroAleatorio = rand(0, 1000);
+            
+                // Verificar si el número aleatorio es múltiplo del número dado
+                if ($numeroAleatorio % $num == 0) {
+                    $bandera = true;
+                }
+            } while (!$bandera);
+            echo "El primer múltiplo de $num obtenido aleatoriamente es: $numeroAleatorio";
+            unset($num, $bandera, $numeroAleatorio);
+        }  
     ?>
+
     <h2>Ejercicio 4</h2>
     <p>Crear un arreglo cuyos índices van de 97 a 122 y cuyos valores son las letras de la ‘a’
     a la ‘z’. Usa la función chr(n) que devuelve el caracter cuyo código ASCII es n para poner
@@ -189,5 +193,134 @@
 
         unset($arreglo, $i, $letra, $indice, $valor);
     ?>
+
+    <h2>Ejercicio 5</h2>
+    <p>Usar las variables $edad y $sexo en una instrucción if para identificar una persona de
+        sexo “femenino”, cuya edad oscile entre los 18 y 35 años y mostrar un mensaje de
+        bienvenida apropiado. Por ejemplo:</p>
+    <p>"Bienvenida, usted está en el rango de edad permitido."</p>
+    <p>En caso contrario, deberá devolverse otro mensaje indicando el error.</p>
+    <ul>
+        <li>Los valores para $edad y $sexo se deben obtener por medio de un formulario en HTML.</li>
+        <li>Utilizar el la Variable Superglobal $_POST (revisar documentación).</li>
+    </ul>
+
+    <form method="post">
+        <label for="selecgenero">Selecciona un genero:</label>
+        <select id="selecgenero" name="genero">
+            <option value="masc">Masculino</option>
+            <option value="fem">Femenino</option>
+        </select>
+        Edad: <input type="text" name="edad"><br>
+        <input type="submit" name="e5">
+    </form>
+
+    <?php
+        if (isset($_POST['e5'])) {
+            $genero = $_POST['genero'];
+            $edad = $_POST['edad'];
+
+            if ($genero === "fem" && $edad >= 18 && $edad <= 35) {
+                echo "Bienvenida, usted está en el rango de edad permitido.";
+            } else {
+                echo "Usted no cumple con el perfil.";
+            }
+            unset($edad, $genero);
+        }
+    ?>
+
+    <h2>Ejercicio 6</h2>
+    <p>Crea en código duro un arreglo asociativo que sirva para registrar el parque vehicular de
+    una ciudad. Cada vehículo debe ser identificado por:</p>
+    <ul>
+        <li>Matricula</li>
+        <li>Auto
+        <ul>
+            <li>Marca</li>
+            <li>Modelo(año)</li>
+            <li>Tipo (sedan|hachback|camioneta)</li>
+        </ul>
+        </li>
+        <li>Propietario
+        <ul>
+            <li>Nombre</li>
+            <li>Ciudad</li>
+            <li>Dirección</li>
+        </ul>
+        </li>
+    </ul>
+
+    <?php
+        $parqueVehicular = [];
+        $matricula = '';
+           
+
+
+        for ($i = 1000; $i <= 1015; $i++) {
+            $matricula = 'ABC' . $i;
+            /*este ciclo evita que se repitan matriculas*/
+            /*while (isset($parqueVehicular[$matricula])) 
+                $matricula = generarMatricula();
+            }*/
+        
+            $marca = 'Marca' . $i;
+            $modelo = 2020 + $i;
+            $tipo = ($i % 3 == 0) ? 'hatchback' : (($i % 2 == 0) ? 'sedan' : 'camioneta');
+        
+            $nombre = 'Propietario' . $i;
+            $ciudad = 'Ciudad' . $i;
+            $direccion = 'Dirección' . $i;
+        
+
+            $parqueVehicular[$matricula] = array(
+                'Matricula' => $matricula,
+                'Auto' => array(
+                    'Marca' => $marca,
+                    'Modelo' => $modelo,
+                    'Tipo' => $tipo
+                ),
+                'Propietario' => array(
+                    'Nombre' => $nombre,
+                    'Ciudad' => $ciudad,
+                    'Dirección' => $direccion
+                )
+            );
+        }
+        echo '<pre>';
+            print_r($parqueVehicular);
+            echo '</pre>';
+    ?>
+
+    <form method="post">
+        <label for="matricula">Consultar por matrícula:</label>
+        <input type="text" id="matricula" name="matricula">
+        <input type="submit" name="consultaMatricula" value="Consultar">
+    </form>
+    <form method="post">
+        <input type="submit" name="verTodos" value="Ver todos los autos registrados">
+    </form>
+    <?php
+        // Aquí procesas las consultas
+        if (isset($_POST['consultaMatricula'])) {
+            $matricula = $_POST['matricula'];
+            if (isset($parqueVehicular[$matricula])) {
+                echo "<h3>Información del auto con matrícula $matricula:</h3>";
+                print_r($parqueVehicular[$matricula]);
+            } else {
+                echo "<p>No se encontró ningún auto con la matrícula $matricula.</p>";
+            }
+        }
+
+        if (isset($_POST['verTodos'])) {
+            echo "<h3>Lista de todos los autos registrados:</h3>";
+            foreach ($parqueVehicular as $matricula => $infoAuto) { /* Cada elemento consiste en una matrícula 
+                (clave) y la información del auto y propietario asociada (valor).*/
+                echo "<h4>Matrícula: $matricula</h4>";
+                print_r($infoAuto);
+                echo "<br>";
+            }
+        }
+    ?>
+
 </body>
 </html>
