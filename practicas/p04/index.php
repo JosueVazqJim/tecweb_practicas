@@ -136,12 +136,37 @@
         </li>
     </ul>
     <form method="post" action="ejercicio6.php">
+        <label for="matricula">Matricula:</label>
+        <input type="text" name="matricula"><br>
+        <label>Auto</label><br>
+        <label for="marca">Marca:</label>
+        <input type="text" name="marca"><br>
+        <label for="modelo">Modelo:</label>
+        <input type="text" name="modelo"><br>
+        <label for="tipo">Tipo:</label>
+        <select id="tipo" name="tipo">
+            <option value="sedan">Sedan</option>
+            <option value="hachback">Hachback</option>
+            <option value="camioneta">Camioneta</option>
+        </select> <br>
+        <label>Propietario</label><br>
+        <label for="nombre">Nombre:</label>
+        <input type="text" name="nombre"><br>
+        <label for="ciudad">Ciudad:</label>
+        <input type="text" name="ciudad"><br>
+        <label for="direccion">Direccion:</label>
+        <input type="text" name="direccion"><br>
+        <input type="submit" name="registro" value="Registrar">
+    </form>
+    
+    <form method="post" action="ejercicio6.php">
+        <input type="submit" name="verTodos" value="Ver todos los autos registrados">
+    </form>
+
+    <form method="post" action="ejercicio6.php">
         <label for="matricula">Consultar por matrícula:</label>
         <input type="text" id="matricula" name="matricula">
         <input type="submit" name="consultaMatricula" value="Consultar">
-    </form>
-    <form method="post" action="ejercicio6.php">
-        <input type="submit" name="verTodos" value="Ver todos los autos registrados">
     </form>
 </body>
 </html>

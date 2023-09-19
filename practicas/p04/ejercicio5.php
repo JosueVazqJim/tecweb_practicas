@@ -17,8 +17,12 @@
 
             if ($genero === "fem" && $edad >= 18 && $edad <= 35) {
                 echo "Bienvenida, usted está en el rango de edad permitido.";
+                echo "<br>";
+                echo '<a href="index.php">Regresar</a>';
             } else {
                 echo "Usted no cumple con el perfil.";
+                echo "<br>";
+                echo '<a href="index.php">Regresar</a>';
             }
             unset($edad, $genero);
         }
