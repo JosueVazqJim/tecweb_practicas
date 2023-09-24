@@ -3,8 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="es">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Document</title>
 </head>
 <body>
@@ -38,7 +38,7 @@
     <ul>
         <li>$a = “ManejadorSQL”;</li>
         <li>$b = 'MySQL’;</li>
-        <li>$c = &$a;</li>
+        <li>$c = &amp;a;</li>
     </ul>
     <p>a. Ahora muestra el contenido de cada variable</p>
     <?php
@@ -56,7 +56,7 @@
     <p>b. Agrega al código actual las siguientes asignaciones:</p>
     <ul>
         <li>$a = “PHP server”;</li>
-        <li>$b = &$a;</li>
+        <li>$c = &amp;a;</li>
     </ul>
     <?php
         $a = "PHP server";
@@ -74,9 +74,10 @@
     <p>d. Describe en y muestra en la página obtenida qué ocurrió en el segundo bloque de
     asignaciones</p>
     <p>En el punto a, el uso de comillas no es tan importante en este ejemplo,
-        pero el uso & es que apunta a la direccion de memoria de la variable a. 
+        pero el uso &amp; es que apunta a la direccion de memoria de la variable a. 
         Entonces si se modifica a se modifica por consecuente b.
     </p>
+
     
     <h2>Ejercicio 3</h2>
     <p>3. Muestra el contenido de cada variable inmediatamente después de cada asignación,
@@ -84,7 +85,7 @@
     arreglo):</p>
     <ul>
         <li>$a = “PHP5”;</li>
-        <li>$z[] = &$a;</li>
+        <li>$z[] = &amp;a;</li>
         <li>$b = “5a version de PHP”;</li>
         <li>$c = $b*10;</li>
         <li>$a .= $b;</li>
@@ -218,7 +219,7 @@
     </ul>
 
     <h2>Ejercicio 6</h2>
-    <p>Dar y comprobar el valor booleano de las variables $a, $b, $c, $d, $e y $f y muéstralas  usando la función var_dump(<datos>). </p>
+    <p>Dar y comprobar el valor booleano de las variables $a, $b, $c, $d, $e y $f y muéstralas usando la función var_dump(). </p>
     <p>Después investiga una función de PHP que permita transformar el valor booleano de $c y $e  en uno que se pueda mostrar con un echo: </p>
     <ul>
         <li>$a = "0";</li> 
@@ -311,7 +312,7 @@
 
     <h2>Ejercicio 7</h2>
     <p>7. Usando la variable predefinida $_SERVER, determina lo siguiente: </p>
-    <ol type = "a">
+    <ol>
         <li>La versión de Apache y PHP,</li>
         <li>El nombre del sistema operativo (servidor),</li> 
         <li>El idioma del navegador (cliente).</li>
@@ -321,5 +322,9 @@
         echo "b. nombre del sistema operativo (servidor): <br> \$_SERVER['SERVER_NAME'] <br>" .$_SERVER['SERVER_NAME']. "<br>";
         echo "c. idioma del navegador del cliente: <br> \$_SERVER['HTTP_ACCEPT_LANGUAGE'] <br>" .$_SERVER['HTTP_ACCEPT_LANGUAGE']. "<br>";
     ?>
+    <p>
+        <a href="http://validator.w3.org/check?uri=referer"><img
+        src="http://www.w3.org/Icons/valid-xhtml11" alt="Valid XHTML 1.1" height="31" width="88" /></a>
+    </p>
 </body>
 </html>
