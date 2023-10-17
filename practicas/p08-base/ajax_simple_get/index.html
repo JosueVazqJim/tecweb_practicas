@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AJAX Simple</title>
+</head>
+<body>
+    <script>
+        function sendRequest() {
+            var client = new XMLHttpRequest();
+            /** 
+             * SOLICITUD AL SERVIDOR:
+             *  Prototipo de open:      XMLHttpRequest.open(method, url, async)
+             *  ver https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/open 
+             * utiliza el metodo get y va al script php y es aincrono*/
+            client.open('GET', './backend.php', true);
+            /**
+             * TIPO DE DATOS SOLICITADOS
+             * */
+            client.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            /*establece el valor de un encabezado de solicitud HTTP. donde Content-Type es elñ encabezado y 
+            application/x-www-form-urlencoded el valor*/
+            /**
+             * SEGUIMIENTO DE LOS DATOS RECIBIDOS DEL SERVIDOR
+             * Se establece un manejador de eventos onreadystatechange. Este manejador se activa cada vez que cambia el estado 
+             * de la solicitud. En este caso, cuando el estado cambia, se actualiza el contenido del elemento HTML con el ID "titulo" 
+             * con la respuesta de la solicitud.*/
+            client.onreadystatechange = function () {
+                /*esta propiedad onreadystatechange se dispara cada vez que cambia el estado de la solicitud.*/
+                //console.log(client.responseText);
+                document.getElementById('titulo').innerHTML = client.responseText;
+                /* se actualiza el contenido de un elemento HTML con el ID "titulo" con el contenido de la respuesta de la solicitud HTTP. 
+                document.getElementById('titulo') busca un elemento HTML con el ID "titulo".
+                .innerHTML permite cambiar el contenido HTML dentro de ese elemento.
+                client.responseText obtiene el texto de la respuesta de la solicitud HTTP que se está manejando.*/
+            };
+            /*onreadystatechange tiene función de devolución de llamada por lo tanto se ejecuta lueg luego del send()*/
+            /**
+             * SE ENVÍA LA SOLICITUD CON LAS CONSIDERACIONES ANTERIORES
+             * */
+            client.send();
+            /*es el paso final para enviar una solicitud HTTP al servidor después de haber configurado todos los detalles de la solicitud*/
+        }
+    </script>
+
+    <h1 id="titulo"></h1>
+
+    <button onclick="sendRequest()">
+        Hola Mundo
+    </button>
+</body>
+</html>
