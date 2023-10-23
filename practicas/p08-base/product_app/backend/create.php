@@ -15,10 +15,10 @@
         $unidades = $jsonOBJ->unidades;
         $imagen = $jsonOBJ->imagen;
 
-        if ( $result = $conexion->query("SELECT * FROM productos_2 WHERE nombre = '{$nombre}' and eliminado = 0") ) {
+        if ( $result = $conexion->query("SELECT * FROM productos WHERE nombre = '{$nombre}' and eliminado = 0") ) {
             if($result->num_rows === 0){
                 echo "no toy. Puedo ingresar a la BD\n";
-                $sql = "INSERT INTO productos_2 VALUES (null, '{$nombre}', '{$marca}', '{$modelo}', {$precio}, '{$detalles}', {$unidades}, '{$imagen}', 0)";
+                $sql = "INSERT INTO productos VALUES (null, '{$nombre}', '{$marca}', '{$modelo}', {$precio}, '{$detalles}', {$unidades}, '{$imagen}', 0)";
 
                 if ( $conexion->query($sql)) {
                     echo "Nuevo registro creado rey\n";

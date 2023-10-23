@@ -18,7 +18,7 @@
     if ($eliminado == 1)
     {
         /** SE CREA EL OBJETO DE CONEXION */
-        @$link = new mysqli('localhost', 'root', 'Normita1230', 'marketzone');	
+        @$link = new mysqli('localhost', 'root', '1230N0rmita', 'marketzone');	
 
         /** comprobar la conexión */
         if ($link->connect_errno) 
@@ -39,7 +39,7 @@
     }
     elseif($eliminado == 0){
         /** SE CREA EL OBJETO DE CONEXION */
-        @$link = new mysqli('localhost', 'root', 'Normita1230', 'marketzone');	
+        @$link = new mysqli('localhost', 'root', '1230N0rmita', 'marketzone');	
 
         /** comprobar la conexión */
         if ($link->connect_errno) 
@@ -49,7 +49,7 @@
         }
 
         /** Crear una tabla que no devuelve un conjunto de resultados si es que esta el id*/
-        if ( $result = $link->query("SELECT * FROM productos_2 WHERE eliminado = $eliminado") ) 
+        if ( $result = $link->query("SELECT * FROM productos WHERE eliminado = $eliminado") ) 
         {
             $row = $result->fetch_all(MYSQLI_ASSOC);
             

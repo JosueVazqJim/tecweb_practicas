@@ -7,7 +7,7 @@
     if( isset($_POST['id']) ) {
         $coincidencia = $_POST['id'];
         // SE REALIZA LA QUERY DE BÚSQUEDA Y AL MISMO TIEMPO SE VALIDA SI HUBO RESULTADOS
-        if ( $result = $conexion->query("SELECT * FROM productos_2 WHERE id = '{$coincidencia}' OR nombre LIKE '%{$coincidencia}%' or 
+        if ( $result = $conexion->query("SELECT * FROM productos WHERE id = '{$coincidencia}' OR nombre LIKE '%{$coincidencia}%' or 
         marca like '%{$coincidencia}%' or detalles like '%{$coincidencia}%'") ) {
             // SE OBTIENEN solo un resltado
 			//$row = $result->fetch_array(MYSQLI_ASSOC);
