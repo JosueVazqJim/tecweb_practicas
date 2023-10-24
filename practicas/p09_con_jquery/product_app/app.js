@@ -21,6 +21,8 @@ function init() {
 
 
 $(document).ready(function() {
+
+    let editar = false;
     console.log('jQuery trabajando');
     fetchProducts();
 
@@ -82,6 +84,7 @@ $(document).ready(function() {
         // SE CONVIERTE EL JSON DE STRING A OBJETO
         let finalJSON = JSON.parse(productoJsonString);
         // SE AGREGA AL JSON EL NOMBRE DEL PRODUCTO
+        finalJSON['id'] = $('#productID').val();
         finalJSON['nombre'] = $('#name').val();
         // SE OBTIENE EL STRING DEL JSON FINAL
         productoJsonString = JSON.stringify(finalJSON,null,2);
@@ -142,11 +145,19 @@ $(document).ready(function() {
                 }
             }
         }
+        if (editar === false) {
+            var url = './backend/product-add.php';
+        } else {
+            var url = './backend/product-edit.php';
+        }
+
+        console.log(url);
         $.ajax({
-            url: './backend/product-add.php',
+            url: url,
             type: 'POST',
             data: {productoJsonString},
             success: function(response){
+                console.log(response);
                 fetchProducts();
                 let respuesta = JSON.parse(response);
                 let template_bar = '';
@@ -165,7 +176,6 @@ $(document).ready(function() {
             url: './backend/product-list.php',
             type: 'GET',
             success: function(response){
-                console.log(response);
                 let productos = JSON.parse(response);    // similar a eval('('+client.responseText+')');
                 
                 // SE VERIFICA SI EL OBJETO JSON TIENE DATOS
@@ -188,7 +198,9 @@ $(document).ready(function() {
                         template += `
                             <tr productId="${producto.id}">
                                 <td>${producto.id}</td>
-                                <td>${producto.nombre}</td>
+                                <td>
+                                    <a href="#" class="product-item">${producto.nombre}</a>
+                                </td>
                                 <td><ul>${descripcion}</ul></td>
                                 <td>
                                     <button class="product-delete btn btn-danger product-delete">
@@ -205,90 +217,42 @@ $(document).ready(function() {
         });
     }
     $(document).on('click', '.product-delete', function(){
-        let id = event.target.parentElement.parentElement.getAttribute("productId");
-        console.log(id);
-        $.post('./backend/product-delete.php', {id}, function(response) {
-            console.log(response);
-            fetchProducts();
-                let respuesta = JSON.parse(response);
-                let template_bar = '';
-                    template_bar += `
-                        <li>${respuesta.message}</il>
-                    `;
-                    //console.log(response)
-                $('#product-result').show();
-                $('#container').html(template_bar);
-        })
-        
-    })
-});
-
-
-// FUNCIÓN CALLBACK DE BOTÓN "Eliminar"
-function eliminarProducto() {
-    if( confirm("De verdad deseas eliinar el Producto") ) {
-        var id = event.target.parentElement.parentElement.getAttribute("productId");
-        /* var id = document.getElementById('productId').value; no funciona pues productoId es como
-        una clase. 
-        En la otra linea que si funciona línea, estás utilizando el evento (event) para acceder al elemento que 
-        desencadenó el 
-        evento y luego navegando a través de dos niveles de elementos padres (parentElement.parentElement) 
-        para encontrar el elemento que tiene el atributo "productId". Esto funcionará si la estructura del 
-        DOM es la correcta y el atributo "productId" está presente en el elemento.*/
-        //NOTA: OTRA FORMA PODRÍA SER USANDO EL NOMBRE DE LA CLASE, COMO EN LA PRÁCTICA 7
-
-        // SE CREA EL OBJETO DE CONEXIÓN ASÍNCRONA AL SERVIDOR
-        var client = getXMLHttpRequest();
-        client.open('GET', './backend/product-delete.php?id='+id, true);
-        client.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-        client.onreadystatechange = function () {
-            // SE VERIFICA SI LA RESPUESTA ESTÁ LISTA Y FUE SATISFACTORIA
-            if (client.readyState == 4 && client.status == 200) {
-                console.log(client.responseText);
-                // SE OBTIENE EL OBJETO DE DATOS A PARTIR DE UN STRING JSON
-                let respuesta = JSON.parse(client.responseText);
-                // SE CREA UNA PLANTILLA PARA CREAR INFORMACIÓN DE LA BARRA DE ESTADO
-                let template_bar = '';
-                template_bar += `
-                            <li style="list-style: none;">status: ${respuesta.status}</li>
-                            <li style="list-style: none;">message: ${respuesta.message}</li>
+        if(confirm('estas seguro?')){
+            let id = event.target.parentElement.parentElement.getAttribute("productId");
+            console.log(id);
+            $.post('./backend/product-delete.php', {id}, function(response) {
+                console.log(response);
+                fetchProducts();
+                    let respuesta = JSON.parse(response);
+                    let template_bar = '';
+                        template_bar += `
+                            <li>${respuesta.message}</il>
                         `;
-
-                // SE HACE VISIBLE LA BARRA DE ESTADO
-                document.getElementById("product-result").className = "card my-4 d-block";
-                // SE INSERTA LA PLANTILLA PARA LA BARRA DE ESTADO
-                document.getElementById("container").innerHTML = template_bar;
-
-                // SE LISTAN TODOS LOS PRODUCTOS
-                listarProductos();
-            }
-        };
-        client.send();
-    }
-}
-
-// SE CREA EL OBJETO DE CONEXIÓN COMPATIBLE CON EL NAVEGADOR
-function getXMLHttpRequest() {
-    var objetoAjax;
-
-    try{
-        objetoAjax = new XMLHttpRequest();
-    }catch(err1){
-        /**
-         * NOTA: Las siguientes formas de crear el objeto ya son obsoletas
-         *       pero se comparten por motivos historico-académicos.
-         */
-        try{
-            // IE7 y IE8
-            objetoAjax = new ActiveXObject("Msxml2.XMLHTTP");
-        }catch(err2){
-            try{
-                // IE5 y IE6
-                objetoAjax = new ActiveXObject("Microsoft.XMLHTTP");
-            }catch(err3){
-                objetoAjax = false;
-            }
+                        //console.log(response)
+                    $('#product-result').show();
+                    $('#container').html(template_bar);
+            })
         }
-    }
-    return objetoAjax;
-}
+    })
+    $(document).on('click', '.product-item', function(){
+        let id = event.target.parentElement.parentElement.getAttribute("productId");
+        $.post('./backend/product-single.php', {id}, function(response) {
+            console.log(response);
+            const producto = JSON.parse(response);
+            $('#name').val(producto.name);
+
+            var editJSON = {
+                precio: parseFloat(producto.precio), // Convierte a número
+                unidades: parseInt(producto.unidades), // Convierte a número entero
+                modelo: producto.modelo,
+                marca: producto.marca,
+                detalles: producto.detalles,
+                imagen: producto.imagen
+            };
+            var JsonString = JSON.stringify(editJSON,null,2);
+            $('#description').val(JsonString);
+            $('#productID').val(producto.id);
+            editar = true;
+        })
+    });
+});
