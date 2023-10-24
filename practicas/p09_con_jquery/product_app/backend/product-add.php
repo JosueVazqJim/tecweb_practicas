@@ -2,7 +2,7 @@
     include_once __DIR__.'/database.php';
 
     // SE OBTIENE LA INFORMACIÓN DEL PRODUCTO ENVIADA POR EL CLIENTE
-    $producto = file_get_contents('php://input');
+    $producto = $_POST['productoJsonString'];
     $data = array(
         'status'  => 'error',
         'message' => 'Ya existe un producto con ese nombre'
