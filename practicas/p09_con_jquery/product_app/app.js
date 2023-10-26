@@ -76,7 +76,6 @@ $(document).ready(function() {
     });
 
     // FUNCIÓN del add. captura el evento del formulario agregar"
-    
     $('#product-form').submit(function(e) {
         e.preventDefault(); /* evita el funcionamiento normal del formulario*/       
 
@@ -171,6 +170,7 @@ $(document).ready(function() {
         });
     });
 
+    /*funcion de listar productos*/
     function fetchProducts(){
         $.ajax({
             url: './backend/product-list.php',
@@ -216,6 +216,8 @@ $(document).ready(function() {
             }
         });
     }
+
+    /* boton delete*/
     $(document).on('click', '.product-delete', function(){
         if(confirm('estas seguro?')){
             let id = event.target.parentElement.parentElement.getAttribute("productId");
@@ -234,6 +236,8 @@ $(document).ready(function() {
             })
         }
     })
+
+    /* editar producto*/
     $(document).on('click', '.product-item', function(){
         let id = event.target.parentElement.parentElement.getAttribute("productId");
         $.post('./backend/product-single.php', {id}, function(response) {

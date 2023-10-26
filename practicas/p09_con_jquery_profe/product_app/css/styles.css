@@ -1,0 +1,8 @@
+.valid {
+    background-color: #8CFF8C; /* Fondo verde para validación correcta */
+}
+
+/* Estilo para validación incorrecta */
+.invalid {
+    background-color: #FF8C8C; /* Fondo rojo para validación incorrecta */
+}
