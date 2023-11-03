@@ -44,6 +44,38 @@ class Productos extends DataBase{
         $this->conexion->close();
     }
 
+    public function delete($Id){
+        $this->response = [
+            'status' => 'error',
+            'message' => 'ERROR: No se ejecuto'
+        ];
+        // SE REALIZA LA QUERY DE BÚSQUEDA Y AL MISMO TIEMPO SE VALIDA SI HUBO RESULTADOS
+        $sql = "UPDATE productos_2 SET eliminado=1 WHERE id = {$Id}";
+        if ( $this->conexion->query($sql) ) {
+            $this->response['status'] =  "success";
+            $this->response['message'] =  "Producto eliminado";
+        }
+        $this->conexion->close();
+    }
+
+    public function edit($Producto){
+        $this->response = [
+            'status' => 'error',
+            'message' => 'La consulta falló'
+        ];
+        
+        // SE REALIZA LA QUERY DE BÚSQUEDA Y AL MISMO TIEMPO SE VALIDA SI HUBO RESULTADOS
+        $sql =  "UPDATE productos_2 SET nombre='{$Producto->nombre}', marca='{$Producto->marca}',";
+        $sql .= "modelo='{$Producto->modelo}', precio={$Producto->precio}, detalles='{$Producto->detalles}',"; 
+        $sql .= "unidades={$Producto->unidades}, imagen='{$Producto->imagen}' WHERE id={$Producto->id}";
+        $this->conexion->set_charset("utf8");
+        if ( $this->conexion->query($sql) ) {
+            $this->response['status'] =  "success";
+            $this->response['message'] =  "Producto actualizado";
+        }
+        $this->conexion->close();
+    }
+
     public function list(){
         // SE CREA EL ARREGLO QUE SE VA A DEVOLVER EN FORMA DE JSON
         $sql = "SELECT * FROM productos_2 WHERE eliminado = 0";
@@ -68,35 +100,23 @@ class Productos extends DataBase{
         $this->conexion->close();
     }
 
-    public function delete($Id){
-        $this->response = [
-            'status' => 'error',
-            'message' => 'ERROR: No se ejecuto'
-        ];
-        // SE REALIZA LA QUERY DE BÚSQUEDA Y AL MISMO TIEMPO SE VALIDA SI HUBO RESULTADOS
-        $sql = "UPDATE productos_2 SET eliminado=1 WHERE id = {$Id}";
-        if ( $this->conexion->query($sql) ) {
-            $this->response['status'] =  "success";
-            $this->response['message'] =  "Producto eliminado";
-        }
-        $this->conexion->close();
-    }
+    public function search($Coincidencia){
+        $sql = "SELECT * FROM productos_2 WHERE (id = '{$Coincidencia}' OR nombre LIKE '%{$Coincidencia}%' OR marca LIKE '%{$Coincidencia}%' OR detalles LIKE '%{$Coincidencia}%') AND eliminado = 0";
+        if ( $result = $this->conexion->query($sql) ) {
+            // SE OBTIENEN LOS RESULTADOS
+            $rows = $result->fetch_all(MYSQLI_ASSOC);
 
-    public function edit($Producto){
-        $this->response = [
-            'status' => 'error',
-            'message' => 'La consulta falló'
-        ];
-        // SE REALIZA LA QUERY DE BÚSQUEDA Y AL MISMO TIEMPO SE VALIDA SI HUBO RESULTADOS
-        $sql =  "UPDATE productos_2 SET nombre='{$Producto->nombre}', marca='{$Producto->marca}',";
-        $sql .= "modelo='{$Producto->modelo}', precio={$Producto->precio}, detalles='{$Producto->detalles}',"; 
-        $sql .= "unidades={$Producto->unidades}, imagen='{$Producto->imagen}' WHERE id={$Producto->id}";
-        $this->conexion->set_charset("utf8");
-        if ( $this->conexion->query($sql) ) {
-            $this->response['status'] =  "success";
-            $this->response['message'] =  "Producto actualizado";
+            if(!is_null($rows)) {
+                // SE CODIFICAN A UTF-8 LOS DATOS Y SE MAPEAN AL ARREGLO DE RESPUESTA
+                foreach($rows as $num => $row) {
+                    foreach($row as $key => $value) {
+                        $this->response[$num][$key] = utf8_encode($value);
+                    }
+                }
+            }
+            $result->free();
         } else {
-            $this->response['message'] = "ERROR: No se ejecuto $sql. ";
+            die('Query Error: ');
         }
         $this->conexion->close();
     }
@@ -118,6 +138,10 @@ class Productos extends DataBase{
             die('Query Error: ');
         }
         $this->conexion->close();
+    }
+
+    public function sigleByName($Nombre){
+        
     }
 
     public function getResponse(){
