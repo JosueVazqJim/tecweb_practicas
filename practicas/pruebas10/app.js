@@ -92,12 +92,56 @@ $(document).ready(function(){
         }
     });
     $('#product-result').hide(); /*este es un id del div que sirve para mostrar mensajes acerca del estatus de consultas*/
+    listarProductos(); //este es para que siempre muestre los productos de la bd al momento de entrar al index
     
     //EMPEZAMOS CON LAS FUNCIONES
+    //funcion que lista los objetos de la bd disponibles
+    function listarProductos() {
+        $.ajax({
+            url: './backend/product-list.php',
+            type: 'GET',
+            success: function(response) {
+                // SE OBTIENE EL OBJETO DE DATOS A PARTIR DE UN STRING JSON
+                console.log(response);
+                const productos = JSON.parse(response);
+                console.log(productos);
+                // SE VERIFICA SI EL OBJETO JSON TIENE DATOS
+                if(Object.keys(productos).length > 0) {
+                    // SE CREA UNA PLANTILLA PARA CREAR LAS FILAS A INSERTAR EN EL DOCUMENTO HTML
+                    let template = '';
+
+                    productos.forEach(producto => {
+                        // SE CREA UNA LISTA HTML CON LA DESCRIPCIÓN DEL PRODUCTO
+                        let descripcion = '';
+                        descripcion += '<li>precio: '+producto.precio+'</li>';
+                        descripcion += '<li>unidades: '+producto.unidades+'</li>';
+                        descripcion += '<li>modelo: '+producto.modelo+'</li>';
+                        descripcion += '<li>marca: '+producto.marca+'</li>';
+                        descripcion += '<li>detalles: '+producto.detalles+'</li>';
+                    
+                        template += `
+                            <tr productId="${producto.id}">
+                                <td>${producto.id}</td>
+                                <td><a href="#" class="product-item">${producto.nombre}</a></td>
+                                <td><ul>${descripcion}</ul></td>
+                                <td>
+                                    <button class="product-delete btn btn-danger" onclick="">
+                                        Eliminar
+                                    </button>
+                                </td>
+                            </tr>
+                        `;
+                    });
+                    // SE INSERTA LA PLANTILLA EN EL ELEMENTO CON ID "productos"
+                    $('#products').html(template);
+                }
+            }
+        });
+    }
     
     //FUNCION ADD
     $('#product-form').submit(e => {
-        e.preventDefault();
+        e.preventDefault(); //ESTO EVITA EL FUNCIONAMIENTO NORMAL DEL BOTON DEL FORMULARIO, ES DECIR, EVITA QUE SE RECARGUE LA PAGINA
 
         // SE CONVIERTE EL JSON DE STRING A OBJETO
         //let postData = JSON.parse( $('#description').val() );
@@ -173,8 +217,6 @@ $(document).ready(function(){
                             } else {
                                 if (imagen.trim() === "") {
                                     imagen = 'img/default.png';
-
-                                    finalJSON['imagen'] = imagen;
                                     $('#image').addClass("invalid");
                                     alert('agregaremos una imagen por defecto');
                                 }
@@ -217,11 +259,55 @@ $(document).ready(function(){
             // SE INSERTA LA PLANTILLA PARA LA BARRA DE ESTADO
             $('#container').html(template_bar);
             // SE LISTAN TODOS LOS PRODUCTOS
-            //RECORDAR DESCOMENTAR listarProductos();
+            listarProductos();
             // SE REGRESA LA BANDERA DE EDICIÓN A false
             edit = false;
         });
     });
+
+    //FUNCION DELETE
+    $(document).on('click', '.product-delete', function(){
+        if(confirm('estas seguro?')){
+            let id = event.target.parentElement.parentElement.getAttribute("productId");
+            console.log(id);
+            $.post('./backend/product-delete.php', {id}, function(response) {
+                console.log(response);
+                listarProductos();
+                    let respuesta = JSON.parse(response);
+                    let template_bar = '';
+                        template_bar += `
+                            <li>${respuesta.message}</il>
+                        `;
+                        //console.log(response)
+                    $('#product-result').show();
+                    $('#container').html(template_bar);
+            })
+        }
+    });
+
+    //FUNCION EDIT
+    $(document).on('click', '.product-item', (e) => {
+        const element = $(this)[0].activeElement.parentElement.parentElement;
+        const id = $(element).attr('productId');
+        $.post('./backend/product-single.php', {id}, (response) => {
+            // SE CONVIERTE A OBJETO EL JSON OBTENIDO
+            let product = JSON.parse(response);
+            // SE INSERTAN LOS DATOS ESPECIALES EN LOS CAMPOS CORRESPONDIENTES
+            $('#name').val(product.nombre);
+            $('#brand').val(product.marca);
+            $('#model').val(product.modelo);
+            $('#price').val(product.precio);
+            $('#details').val(product.detalles);
+            $('#units').val(product.unidades);
+            $('#image').val(product.imagen);
+           
+            // EL ID SE INSERTA EN UN CAMPO OCULTO PARA USARLO DESPUÉS PARA LA ACTUALIZACIÓN
+            $('#productId').val(product.id);
+            // SE PONE LA BANDERA DE EDICIÓN EN true
+            edit = true;
+        });
+        e.preventDefault();
+    }); 
 
 
 
