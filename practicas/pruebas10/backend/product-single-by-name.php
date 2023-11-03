@@ -1,13 +1,13 @@
 <?php
 require_once __DIR__ . '/API/Productos.php'; 
 use PRACTICA10\PRODUCTOS\Productos as Productos;
-$conexionProd = new Productos();
-if ($conexionProd->obtenerConexion()) {
+$conexionSBN = new Productos();
+if ($conexionSBN->obtenerConexion()) {
     // Verifica si se envió un parámetro 'data' en el POST
     if (isset($_GET['name'])) {
         $Nombre = $_GET['name'];
-        $conexionProd->singleByName($Nombre);
-        $conexionProd->getResponse();
+        $conexionSBN->singleByName($Nombre);
+        $conexionSBN->getResponse();
     }
 
 }else{

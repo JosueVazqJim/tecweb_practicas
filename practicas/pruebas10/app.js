@@ -1,7 +1,8 @@
 $(document).ready(function(){
     let edit = false;
 
-    /*empiezo con las validaciones, no las pongo en el add o en el edit pues eso funciona cuando se da clic en un boton para enviar*/
+    /*VALIDACIONES DE INPUTS CON BLUR. al momento de dejar de hacer focus en los inputs*/
+    //VALIDACION DEL NOMBRE
     $("#name").on("blur", function() {
         const nombre = $(this).val();    
         if (nombre.length === 0 || nombre.length > 100) {
@@ -91,10 +92,21 @@ $(document).ready(function(){
             $('#image-validation').hide();
         }
     });
+    //FIN DE LAS VALIDACIONES BLUR
+
     $('#product-result').hide(); /*este es un id del div que sirve para mostrar mensajes acerca del estatus de consultas*/
     listarProductos(); //este es para que siempre muestre los productos de la bd al momento de entrar al index
+    /*Los sig id son para ocultar los divs que sirven para hacer la primera validacion de entradas. Muestran un pequeño mensaje 
+    debajo del input indicando que esta mal*/
+    $('#name-validation').hide();
+    $('#model-validation').hide();
+    $('#price-validation').hide();
+    $('#details-validation').hide();
+    $('#units-validation').hide();
+    $('#image-validation').hide();
     
     //EMPEZAMOS CON LAS FUNCIONES
+
     //funcion que lista los objetos de la bd disponibles
     function listarProductos() {
         $.ajax({
@@ -102,14 +114,12 @@ $(document).ready(function(){
             type: 'GET',
             success: function(response) {
                 // SE OBTIENE EL OBJETO DE DATOS A PARTIR DE UN STRING JSON
-                console.log(response);
                 const productos = JSON.parse(response);
                 console.log(productos);
                 // SE VERIFICA SI EL OBJETO JSON TIENE DATOS
                 if(Object.keys(productos).length > 0) {
                     // SE CREA UNA PLANTILLA PARA CREAR LAS FILAS A INSERTAR EN EL DOCUMENTO HTML
                     let template = '';
-
                     productos.forEach(producto => {
                         // SE CREA UNA LISTA HTML CON LA DESCRIPCIÓN DEL PRODUCTO
                         let descripcion = '';
@@ -139,7 +149,7 @@ $(document).ready(function(){
         });
     }
 
-    //FUNCION SEARCH
+    //FUNCION SEARCH, se activa cada que tipeamos sobre la barra de busqueda
     $('#search').keyup(function() {
         if($('#search').val()) {
             let search = $('#search').val();
@@ -173,7 +183,7 @@ $(document).ready(function(){
                                         <td><a href="#" class="product-item">${producto.nombre}</a></td>
                                         <td><ul>${descripcion}</ul></td>
                                         <td>
-                                            <button class="product-delete btn btn-danger">
+                                            <button class="product-delete btn btn-danger" onclick="">
                                                 Eliminar
                                             </button>
                                         </td>
@@ -203,12 +213,7 @@ $(document).ready(function(){
     //FUNCION ADD
     $('#product-form').submit(e => {
         e.preventDefault(); //ESTO EVITA EL FUNCIONAMIENTO NORMAL DEL BOTON DEL FORMULARIO, ES DECIR, EVITA QUE SE RECARGUE LA PAGINA
-
-        // SE CONVIERTE EL JSON DE STRING A OBJETO
-        //let postData = JSON.parse( $('#description').val() );
-        // SE AGREGA AL JSON EL NOMBRE DEL PRODUCTO
-       /*postData['nombre'] = $('#name').val();
-        postData['id'] = $('#productId').val();*/
+        /*Se crea un objeto javascript*/
         let postData = {
             id : $('#productId').val(),
             nombre : $('#name').val(),
@@ -221,11 +226,8 @@ $(document).ready(function(){
         };
 
         console.log(postData)
-        /**
-         * AQUÍ DEBES AGREGAR LAS VALIDACIONES DE LOS DATOS EN EL JSON
-         * --> EN CASO DE NO HABER ERRORES, SE ENVIAR EL PRODUCTO A AGREGAR
-         **/
         
+        //comienzan las validaciones del formulario, se hacen luego del envio del formulario
         var nombre=postData['nombre'];
         var marca = postData['marca'];
         var modelo=postData['modelo'];
@@ -280,6 +282,7 @@ $(document).ready(function(){
                                     imagen = 'img/default.png';
                                     $('#image').addClass("invalid");
                                     alert('agregaremos una imagen por defecto');
+                                    $('#image').val("img/default.png");
                                 }
                             }
                         }
@@ -296,7 +299,6 @@ $(document).ready(function(){
         
         $.post(url, { data: objPostData }, (response) => {
             console.log(response);
-            //console.log(response);
             // SE OBTIENE EL OBJETO DE DATOS A PARTIR DE UN STRING JSON
             let respuesta = JSON.parse(response);
             // SE CREA UNA PLANTILLA PARA CREAR INFORMACIÓN DE LA BARRA DE ESTADO
@@ -306,15 +308,14 @@ $(document).ready(function(){
                         <li style="list-style: none;">message: ${respuesta.message}</li>
                     `;
             // SE REINICIA EL FORMULARIO
-            $('#name').val('');
-            $('#brand').val('rolex');
-            $('#model').val('');
-            $('#price').val('');
-            $('#details').val('');
-            $('#units').val('');
-            $('#image').val('');
+            $('#name').val('').removeClass('valid');
+            $('#brand').val('rolex').removeClass('valid');
+            $('#model').val('').removeClass('valid');
+            $('#price').val('').removeClass('valid');
+            $('#details').val('').removeClass('valid');
+            $('#units').val('').removeClass('valid');
+            $('#image').val('').removeClass('valid');
 
-            $('#description').val(objPostData);
             // SE HACE VISIBLE LA BARRA DE ESTADO
             $('#product-result').show();
             // SE INSERTA LA PLANTILLA PARA LA BARRA DE ESTADO
@@ -327,11 +328,11 @@ $(document).ready(function(){
     });
 
     //FUNCION DELETE
-    $(document).on('click', '.product-delete', function(){
+    $(document).on('click', '.product-delete', (e) =>{
         if(confirm('estas seguro?')){
             let id = event.target.parentElement.parentElement.getAttribute("productId");
             console.log(id);
-            $.post('./backend/product-delete.php', {id}, function(response) {
+            $.post('./backend/product-delete.php', {id}, (response) => {
                 console.log(response);
                 listarProductos();
                     let respuesta = JSON.parse(response);
@@ -339,10 +340,9 @@ $(document).ready(function(){
                         template_bar += `
                             <li>${respuesta.message}</il>
                         `;
-                        //console.log(response)
                     $('#product-result').show();
                     $('#container').html(template_bar);
-            })
+            });
         }
     });
 
@@ -379,21 +379,18 @@ $(document).ready(function(){
                 data: {name},
                 type: 'GET',
                 success: function (response) {
-                    if(!response.error) {
-                        // SE OBTIENE EL OBJETO DE DATOS A PARTIR DE UN STRING JSON
-                        const productos = JSON.parse(response);
-                        
-                        // SE VERIFICA SI EL OBJETO JSON TIENE DATOS
-                            // SE CREA UNA PLANTILLA PARA CREAR LAS FILAS A INSERTAR EN EL DOCUMENTO HTML
-                            let template_bar = '';
-                            template_bar += `
-                                <li>${productos.message}</il>
-                            `;
-                            // SE HACE VISIBLE LA BARRA DE ESTADO
-                            $('#product-result').show();
-                            // SE INSERTA LA PLANTILLA PARA LA BARRA DE ESTADO
-                            $('#container').html(template_bar);
-                    }
+                    // SE OBTIENE EL OBJETO DE DATOS A PARTIR DE UN STRING JSON
+                    const productos = JSON.parse(response);
+                    
+                    // SE CREA UNA PLANTILLA PARA CREAR LAS FILAS A INSERTAR EN EL DOCUMENTO HTML
+                    let template_bar = '';
+                    template_bar += `
+                        <li>${productos.message}</il>
+                    `;
+                    // SE HACE VISIBLE LA BARRA DE ESTADO
+                    $('#product-result').show();
+                    // SE INSERTA LA PLANTILLA PARA LA BARRA DE ESTADO
+                    $('#container').html(template_bar);
                 }
             });
         }
@@ -401,14 +398,4 @@ $(document).ready(function(){
             $('#product-result').hide();
         }
     });
-
-
-    /*Los sig id son para ocultar los divs que sirven para hacer la primera validacion de entradas. Muestran un pequeño mensaje 
-    debajo del input indicando que esta mal*/
-    $('#name-validation').hide();
-    $('#model-validation').hide();
-    $('#price-validation').hide();
-    $('#details-validation').hide();
-    $('#units-validation').hide();
-    $('#image-validation').hide();
 });

@@ -5,10 +5,8 @@ $conexionProd = new Productos();
 if ($conexionProd->obtenerConexion()) {
     // Verifica si se envió un parámetro 'data' en el POST
     if (isset($_POST['data'])) {
-        // Decodifica la cadena JSON en un objeto PHP
-        //$producto = json_decode($_POST['data']);
+        // data se convierte a un string json y luego a un objeto PHP
         $Producto = json_decode( json_encode($_POST['data']) );
-
         // Agrega el producto a la base de datos
         $conexionProd->add($Producto);
         $conexionProd->getResponse();
