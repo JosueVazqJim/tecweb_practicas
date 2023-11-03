@@ -140,8 +140,24 @@ class Productos extends DataBase{
         $this->conexion->close();
     }
 
-    public function sigleByName($Nombre){
-        
+    public function singleByName($Nombre){
+        $this->response = [
+            'status'  => 'success',
+            'message' => 'Búsqueda exitosa, no se encontraron productos similares.'
+        ];
+        // SE REALIZA LA QUERY DE BÚSQUEDA
+        $sql = "SELECT * FROM productos_2 WHERE nombre = '$Nombre'";
+        $this->conexion->set_charset("utf8");
+        if ($result = $this->conexion->query($sql)) {
+            // SE OBTIENEN LOS RESULTADOS
+            $rows = $result->fetch_all(MYSQLI_ASSOC);
+            if (!is_null($rows) && count($rows) > 0) {
+                // Se encontraron productos similares
+                $this->response['message'] = 'Se encontraron productos similares.';
+            }
+            $result->free();
+        }
+        $this->conexion->close();
     }
 
     public function getResponse(){

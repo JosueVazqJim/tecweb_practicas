@@ -370,6 +370,37 @@ $(document).ready(function(){
         e.preventDefault();
     }); 
 
+    //Funcion para singleByName que sirve para dar un mensaje si el nombre del producto ya existe
+    $('#name').keyup(function() {
+        if($('#name').val()) {
+            let name = $('#name').val();
+            $.ajax({
+                url: './backend/product-single-by-name.php?name='+$('#name').val(),
+                data: {name},
+                type: 'GET',
+                success: function (response) {
+                    if(!response.error) {
+                        // SE OBTIENE EL OBJETO DE DATOS A PARTIR DE UN STRING JSON
+                        const productos = JSON.parse(response);
+                        
+                        // SE VERIFICA SI EL OBJETO JSON TIENE DATOS
+                            // SE CREA UNA PLANTILLA PARA CREAR LAS FILAS A INSERTAR EN EL DOCUMENTO HTML
+                            let template_bar = '';
+                            template_bar += `
+                                <li>${productos.message}</il>
+                            `;
+                            // SE HACE VISIBLE LA BARRA DE ESTADO
+                            $('#product-result').show();
+                            // SE INSERTA LA PLANTILLA PARA LA BARRA DE ESTADO
+                            $('#container').html(template_bar);
+                    }
+                }
+            });
+        }
+        else {
+            $('#product-result').hide();
+        }
+    });
 
 
     /*Los sig id son para ocultar los divs que sirven para hacer la primera validacion de entradas. Muestran un pequeño mensaje 
