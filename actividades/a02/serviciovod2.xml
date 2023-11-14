@@ -1,0 +1,121 @@
+<CatalogoVOD>
+    <cuenta correo="marcomontiel@gmail.com">
+        <perfiles>
+            <perfil usuario="Marco Montiel" idioma="Inglés">
+            </perfil>
+            <perfil usuario="Ana Ateno" idioma="Español">
+            </perfil>
+        </perfiles>
+    </cuenta>
+
+    <contenido>
+        <peliculas>
+            <genero nombre="Ciencia Ficcion">
+                <titulo duracion="97min.">
+                    <nombre>
+                        Valerian y la ciudad de los 1000 planetas
+                    </nombre>
+                </titulo>
+                <titulo duracion="95min.">
+                    <nombre>
+                        Alien
+                    </nombre>
+                </titulo>
+                <titulo duracion="111min.">
+                    <nombre>
+                        Terminator
+                    </nombre>
+                </titulo>
+                <titulo duracion="107min.">
+                    <nombre>
+                        Elysium
+                    </nombre>
+                </titulo>
+            </genero>
+            <genero nombre="Terror">
+                <titulo duracion="90min.">
+                    <nombre>
+                        La Monja 2
+                    </nombre>
+                </titulo>
+                <titulo duracion="60min.">
+                    <nombre>
+                        Border Patrol
+                    </nombre>
+                </titulo>
+                <titulo duracion="95min.">
+                    <nombre>
+                        El despertar del diablo
+                    </nombre>
+                </titulo>
+                <titulo duracion="90min.">
+                    <nombre>
+                        Camino hacie el terror
+                    </nombre>
+                </titulo>
+            </genero>
+        </peliculas>
+        <programas>
+            <genero nombre="Comedia">
+                <titulo duracion="20min, por capítulo aprox.">
+                    <nombre>
+                        Malcolm el de enmedio
+                    </nombre>
+                </titulo>
+                <titulo duracion="18min, por capítulo aprox.">
+                    <nombre>
+                        The Bing Bang Teory
+                    </nombre>
+                </titulo>
+                <titulo duracion="20min, por capítulo aprox.">
+                    <nombre>
+                        The Office
+                    </nombre>
+                </titulo>
+                <titulo duracion="17min, por capítulo aprox.">
+                    <nombre>
+                        La familia peluche
+                    </nombre>
+                </titulo>
+            </genero>
+            <genero>
+                <nombre>
+                    Drama
+                </nombre>
+                <titulo>
+                    <nombre>
+                        Breaking bad
+                    </nombre>
+                    <duracion>
+                        40min, por capítulo aprox.
+                    </duracion>
+                </titulo>
+                <titulo>
+                    <nombre>
+                        Game of thrones
+                    </nombre>
+                    <duracion>
+                        50min, por capítulo aprox.
+                    </duracion>
+                </titulo>
+                <titulo>
+                    <nombre>
+                        Chernobyl
+                    </nombre>
+                    <duracion>
+                        55min, por capítulo aprox.
+                    </duracion>
+                </titulo>
+                <titulo>
+                    <nombre>
+                        12 monos
+                    </nombre>
+                    <duracion>
+                        53min, por capítulo aprox.
+                    </duracion>
+                </titulo>
+            </genero>
+        </programas>
+    </contenido>
+
+</CatalogoVOD>
