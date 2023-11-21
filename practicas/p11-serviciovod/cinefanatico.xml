@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<!DOCTYPE cinefanatico SYSTEM "./cinefanatico.dtd">
+<cinefanatico>
+    <tarjeta noserie="123456" visitas="10" puntos="10">
+        <nombre></nombre>
+        <correo></correo>
+    </tarjeta>
+</cinefanatico>

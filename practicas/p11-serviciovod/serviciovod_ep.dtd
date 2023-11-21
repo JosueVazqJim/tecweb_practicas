@@ -1,0 +1,17 @@
+<!ENTITY % region "region (MEX|USA|ESP|ARG|KOR|USA) #REQUIRED">
+<!ELEMENT CatalogoVOD (cuenta, contenido)>
+<!ELEMENT cuenta (perfiles)>
+<!ATTLIST cuenta correo CDATA #REQUIRED>
+<!ELEMENT perfiles (perfil+)>
+<!ELEMENT perfil EMPTY>
+<!ATTLIST perfil usuario CDATA #REQUIRED>
+<!ATTLIST perfil idioma CDATA #IMPLIED>
+<!ELEMENT contenido (peliculas, series)>
+<!ELEMENT peliculas (genero*)>
+<!ELEMENT series (genero*)>
+<!ATTLIST peliculas %region;>
+<!ATTLIST series %region;>
+<!ELEMENT genero (titulo*)>
+<!ATTLIST genero nombre CDATA #REQUIRED>
+<!ELEMENT titulo (#PCDATA)>
+<!ATTLIST titulo duracion NMTOKEN #REQUIRED>
