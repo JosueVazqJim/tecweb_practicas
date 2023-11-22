@@ -1,0 +1,5 @@
+<!ELEMENT mensaje (de, a, texto)>
+<!ATTLIST mensaje prioridad (normal|urgente) "normal">
+<!ELEMENT texto (#PCDATA)>
+<!ATTLIST texto idioma CDATA #REQUIRED>
+<!ELEMENT texto (#PCDATA)>
