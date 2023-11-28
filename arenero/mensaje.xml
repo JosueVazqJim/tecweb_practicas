@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mensaje SYSTEM "/mensaje.dtd">
+<mensaje prioridad="urgente">
+    <de>Alfred Hitchock</de>
+    <a>Hans van Parijs</a>
+    <texto idioma="holandés"> Hallo Hans, hoe gaat het? ... </texto>
+</mensaje>
