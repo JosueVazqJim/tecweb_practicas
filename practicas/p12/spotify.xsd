@@ -1,33 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
 
-    <xs:element name="Spotify">
-        <xs:complexType>
-            <xs:sequence>
-                <xs:element maxOccurs="unbounded" minOccurs="1" name="Cuenta">
-                    <xs:complexType>
-                        <xs:sequence>
-                            <xs:element name="nombre" type="xs:string"/>
-                            <xs:element name="correo" type="xs:string"/>
-                            <xs:element name="telefono" minOccurs="0" >
-                                <xs:complexType>
-                                    <xs:simpleContent>
-                                        <xs:extension base="xs:string">
-                                            <xs:attribute name="tipo" type="xs:string"
-                                                use="required"/>
-                                        </xs:extension>
-                                    </xs:simpleContent>
-                                </xs:complexType>
-                            </xs:element>
-                        </xs:sequence>
-                        <xs:attribute name="id" type="xs:string" use="required"/>
-                        <xs:attribute name="plan" type="xs:string" use="required"/>
-                        <xs:attribute name="fechaIni" type="xs:string" use="optional"/>
-                        <xs:attribute name="fechaFin" type="xs:string" use="optional"/>
-                    </xs:complexType>
-                </xs:element>
-            </xs:sequence>
-            <xs:attribute name="version" type="xs:string"/>
-        </xs:complexType>
-    </xs:element>
-</xs:schema>
+    <xsd:element name="Spotify">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element maxOccurs="unbounded" minOccurs="1" name="Cuenta">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="nombre" type="xsd:string"/>
+                            <xsd:element name="correo" type="xsd:string"/>
+                            <xsd:element name="telefono" minOccurs="0">
+                                <xsd:complexType>
+                                    <xsd:simpleContent>
+                                        <xsd:extension base="xsd:string">
+                                            <xsd:attribute name="tipo" type="xsd:string" use="required"/>
+                                        </xsd:extension>
+                                    </xsd:simpleContent>
+                                </xsd:complexType>
+                            </xsd:element>
+                        </xsd:sequence>
+                        <xsd:attribute name="id" type="xsd:string" use="required"/>
+                        <xsd:attribute name="plan" type="xsd:string" use="required"/>
+                        <xsd:attribute name="fechaIni" type="xsd:string" use="optional"/>
+                        <xsd:attribute name="fechaFin" type="xsd:string" use="optional"/>
+                    </xsd:complexType>
+                </xsd:element>
+            </xsd:sequence>
+            <xsd:attribute name="version" type="xsd:string"/>
+        </xsd:complexType>
+    </xsd:element>
+</xsd:schema>

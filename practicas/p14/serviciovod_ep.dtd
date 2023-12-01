@@ -3,7 +3,7 @@
 <!ELEMENT cuenta (perfiles)>
 <!ATTLIST cuenta correo CDATA #REQUIRED>
 <!ELEMENT perfiles (perfil+)>
-<!ELEMENT perfil EMPTY>
+<!ELEMENT perfil (peliculas, series)>
 <!ATTLIST perfil usuario CDATA #REQUIRED>
 <!ATTLIST perfil idioma CDATA #IMPLIED>
 <!ELEMENT contenido (peliculas, series)>

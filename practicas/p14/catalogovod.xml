@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="catalogovod.xsl"?>
+<!DOCTYPE CatalogoVOD SYSTEM "./serviciovod_ep.dtd">
+
+<CatalogoVOD>
+    <cuenta correo="tony.stark@gmail.com">
+        <perfiles>
+            <perfil usuario="Robert Downey Jr." idioma="English">
+                <peliculas region="MEX">
+                    <genero nombre="Comedia">
+                        <titulo duracion="01:27:00">Besos de azúcar</titulo>
+                        <titulo duracion="01:40:00">No Manches Frida</titulo>
+                    </genero>
+                    <genero nombre="Acción">
+                        <titulo duracion="02:01:00">Sicario</titulo>
+                        <titulo duracion="01:47:00">Una película de policias</titulo>
+                    </genero>
+                </peliculas>
+                <series region="MEX">
+                    <genero nombre="Acción">
+                        <titulo duracion="00:45:00">Die Hard</titulo>
+                        <titulo duracion="00:50:00">Mad Max: Fury Road</titulo>
+                    </genero>
+                    <genero nombre="Ciencia Ficción">
+                        <titulo duracion="00:55:00">Blade Runner</titulo>
+                        <titulo duracion="01:30:00">The Matrix</titulo>
+                    </genero>
+                </series>
+            </perfil>
+            <perfil usuario="Chris Evans" idioma="English">
+                <peliculas region="MEX">
+                    <genero nombre="Drama">
+                        <titulo duracion="02:15:00">Bajo el mismo cielo</titulo>
+                        <titulo duracion="01:55:00">Laberinto de emociones</titulo>
+                    </genero>
+                    <genero nombre="Romance">
+                        <titulo duracion="02:10:00">Amor en el viento</titulo>
+                        <titulo duracion="01:50:00">Pasión sin fronteras</titulo>
+                    </genero>
+                </peliculas>
+                <series region="USA">
+                    <genero nombre="Drama">
+                        <titulo duracion="00:50:00">Breaking Bad</titulo>
+                        <titulo duracion="00:45:00">The Crown</titulo>
+                    </genero>
+                    <genero nombre="Ciencia Ficción">
+                        <titulo duracion="00:42:00">Stranger Things</titulo>
+                        <titulo duracion="00:55:00">Westworld</titulo>
+                    </genero>
+                </series>
+            </perfil>
+        </perfiles>
+    </cuenta>
+    <contenido>
+        <peliculas region="MEX">
+            <genero nombre="Super Héroes">
+                <titulo duracion="02:04:00">Capitán América: El primer vengador.</titulo>
+                <titulo duracion="02:06:00">Iron Man: el hombre de hierro</titulo>
+            </genero>
+            <genero nombre="Terror">
+                <titulo duracion="01:51:00">Halloween: la noche final</titulo>
+                <titulo duracion="01:42:00">El teléfono negro</titulo>
+            </genero>
+            <genero nombre="predefinidas">
+                <titulo duracion="01:00:00"> &lt;video id=&quot;11&quot;&gt;&amp;lt;&lt;/video&gt; </titulo>
+                <titulo duracion="01:22:00"><![CDATA[ <video id="11">&lt;</video> ]]></titulo>
+                <titulo duracion="01:22:00">%elemento-alf</titulo>
+            </genero>
+        </peliculas>
+        <series region="USA">
+            <genero nombre="Comedia">
+                <titulo duracion="00:40:00">Friends</titulo>
+                <titulo duracion="00:40:00">The Big Bang Theory</titulo>
+            </genero>
+            <genero nombre="Drama Criminal">
+                <titulo duracion="0s0:45:00">Criminal Minds</titulo>
+                <titulo duracion="00:50:00">Dahmer</titulo>
+            </genero>
+        </series>
+    </contenido>
+</CatalogoVOD>

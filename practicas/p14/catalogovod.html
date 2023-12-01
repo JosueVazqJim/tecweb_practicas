@@ -1,0 +1,252 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/strict.dtd">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <title>Mi primera transformaci&oacute;n</title>
+      <link rel="stylesheet" href="https://bootswatch.com/5/lux/bootstrap.min.css">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"><style type="text/css">
+                    
+                    .principal{
+                    background-color: #f3f3f3;
+                    border: none;
+                    display: block;
+                    margin: 0px 0;
+                    padding: 0;
+                    text-align: center;
+                    width: 100%;
+                    }
+                    nav h1{
+                    font-family: "Roboto",sans-serif;
+                    font-weight: 700;
+                    color: #000;
+                    }
+                    
+                    .navbar-light .navbar-nav .nav-link:hover, .navbar-light .navbar-nav .nav-link.active {
+                    color: var(--secondary);
+                    }
+                    .activeNav{
+                    border-bottom: 5px solid gray;
+                    }
+                    
+                    .lt{
+                    margin: 0 20px 0 0;
+                    }
+                    .navbar-light .navbar-nav .nav-link {
+                    font-family: 'Roboto', sans-serif;
+                    margin-left: 30px;
+                    padding: 30px 0;
+                    font-size: 16px;
+                    font-weight: 700;
+                    text-transform: uppercase;
+                    }
+                    
+                    .btn{
+                    font-family: 'Roboto', sans-serif!important;
+                    font-weight: 700!important;
+                    transition: 1s!important;
+                    border-radius: 0!important;
+                    }
+                    
+                    .imagen{
+                        width: 10vw;
+                        height: 10vw
+                    }
+                    
+                </style></head>
+   <body>
+      <div>
+         <div class="principal">
+            <nav class="navbar navbar-expand-lg navbar-light shadow-sm py-3 py-lg-0 px-3 px-lg-0"><a href="#" class="navbar-brand ms-lg-5"><img class="img-fluid imagen" src="logoC.png"></a><button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"><span class="navbar-toggler-icon"></span></button><div class="collapse navbar-collapse" id="navbarCollapse">
+                  <div class="navbar-nav ms-auto py-0"><a href="#" class="nav-item nav-link active activeNav">Cat&aacute;logo</a><a href="#" class="nav-item nav-link">Pel&iacute;culas</a><a href="#" class="nav-item nav-link ">Series</a><a href="#" class="nav-item nav-link lt">Planes</a><a href="#" class="nav-link bg-back text-white px-5 ms-lg-4 btn btn-dark active activeNav"><i class="bi bi-people"></i>
+                        Perfiles
+                        </a></div>
+               </div>
+            </nav>
+            <div class="container-fluid">
+               <div class="container">
+                  <div class="row justify-content-center">
+                     <div class="col-12 px-0 m-3">
+                        <div class="border-start border-end border-5 border-dark col-12 px-3 py-3 mb-5">
+                           <h1 class="display-5 text-uppercase">Cat&aacute;logo completo</h1>
+                        </div>
+                        <ul class="nav nav-tabs" role="tablist">
+                           <li class="nav-item" role="presentation"><a class="nav-link active" data-bs-toggle="tab" href="#movies" aria-selected="true" role="tab">Pel&iacute;culas</a></li>
+                           <li class="nav-item" role="presentation"><a class="nav-link" data-bs-toggle="tab" href="#series" aria-selected="false" role="tab" tabindex="-1">Series</a></li>
+                        </ul>
+                        <div id="myTabContent" class="tab-content" bis_skin_checked="1">
+                           <div class="tab-pane fade active show" id="movies" role="tabpanel" bis_skin_checked="1">
+                              <div>
+                                 <table class="table">
+                                    <thead>
+                                       <tr class="table-primary">
+                                          <th scope="col">T&iacute;tulo</th>
+                                          <th scope="col">Duraci&oacute;n</th>
+                                          <th scope="col">G&eacute;nero</th>
+                                       </tr>
+                                    </thead>
+                                    <tbody>
+                                       <tr>
+                                          <th>Besos de az&uacute;car</th>
+                                          <td>01:27:00</td>
+                                          <td>Comedia</td>
+                                       </tr>
+                                       <tr>
+                                          <th>No Manches Frida</th>
+                                          <td>01:40:00</td>
+                                          <td>Comedia</td>
+                                       </tr>
+                                       <tr>
+                                          <th>Sicario</th>
+                                          <td>02:01:00</td>
+                                          <td>Acci&oacute;n</td>
+                                       </tr>
+                                       <tr>
+                                          <th>Una pel&iacute;cula de policias</th>
+                                          <td>01:47:00</td>
+                                          <td>Acci&oacute;n</td>
+                                       </tr>
+                                       <tr>
+                                          <th>Bajo el mismo cielo</th>
+                                          <td>02:15:00</td>
+                                          <td>Drama</td>
+                                       </tr>
+                                       <tr>
+                                          <th>Laberinto de emociones</th>
+                                          <td>01:55:00</td>
+                                          <td>Drama</td>
+                                       </tr>
+                                       <tr>
+                                          <th>Amor en el viento</th>
+                                          <td>02:10:00</td>
+                                          <td>Romance</td>
+                                       </tr>
+                                       <tr>
+                                          <th>Pasi&oacute;n sin fronteras</th>
+                                          <td>01:50:00</td>
+                                          <td>Romance</td>
+                                       </tr>
+                                       <tr>
+                                          <th>Capit&aacute;n Am&eacute;rica: El primer vengador.</th>
+                                          <td>02:04:00</td>
+                                          <td>Super H&eacute;roes</td>
+                                       </tr>
+                                       <tr>
+                                          <th>Iron Man: el hombre de hierro</th>
+                                          <td>02:06:00</td>
+                                          <td>Super H&eacute;roes</td>
+                                       </tr>
+                                       <tr>
+                                          <th>Halloween: la noche final</th>
+                                          <td>01:51:00</td>
+                                          <td>Terror</td>
+                                       </tr>
+                                       <tr>
+                                          <th>El tel&eacute;fono negro</th>
+                                          <td>01:42:00</td>
+                                          <td>Terror</td>
+                                       </tr>
+                                       <tr>
+                                          <th> &lt;video id="11"&gt;&amp;lt;&lt;/video&gt; </th>
+                                          <td>01:00:00</td>
+                                          <td>predefinidas</td>
+                                       </tr>
+                                       <tr>
+                                          <th> &lt;video id="11"&gt;&amp;lt;&lt;/video&gt; </th>
+                                          <td>01:22:00</td>
+                                          <td>predefinidas</td>
+                                       </tr>
+                                       <tr>
+                                          <th>%elemento-alf</th>
+                                          <td>01:22:00</td>
+                                          <td>predefinidas</td>
+                                       </tr>
+                                    </tbody>
+                                 </table>
+                              </div>
+                           </div>
+                           <div class="tab-pane fade" id="series" role="tabpanel" bis_skin_checked="1">
+                              <div>
+                                 <table class="table">
+                                    <thead>
+                                       <tr class="table-dark">
+                                          <th scope="col">T&iacute;tulo</th>
+                                          <th scope="col">Duraci&oacute;n</th>
+                                          <th scope="col">G&eacute;nero</th>
+                                       </tr>
+                                    </thead>
+                                    <tbody>
+                                       <tr>
+                                          <th>Die Hard</th>
+                                          <td>00:45:00</td>
+                                          <td>Acci&oacute;n</td>
+                                       </tr>
+                                       <tr>
+                                          <th>Mad Max: Fury Road</th>
+                                          <td>00:50:00</td>
+                                          <td>Acci&oacute;n</td>
+                                       </tr>
+                                       <tr>
+                                          <th>Blade Runner</th>
+                                          <td>00:55:00</td>
+                                          <td>Ciencia Ficci&oacute;n</td>
+                                       </tr>
+                                       <tr>
+                                          <th>The Matrix</th>
+                                          <td>01:30:00</td>
+                                          <td>Ciencia Ficci&oacute;n</td>
+                                       </tr>
+                                       <tr>
+                                          <th>Breaking Bad</th>
+                                          <td>00:50:00</td>
+                                          <td>Drama</td>
+                                       </tr>
+                                       <tr>
+                                          <th>The Crown</th>
+                                          <td>00:45:00</td>
+                                          <td>Drama</td>
+                                       </tr>
+                                       <tr>
+                                          <th>Stranger Things</th>
+                                          <td>00:42:00</td>
+                                          <td>Ciencia Ficci&oacute;n</td>
+                                       </tr>
+                                       <tr>
+                                          <th>Westworld</th>
+                                          <td>00:55:00</td>
+                                          <td>Ciencia Ficci&oacute;n</td>
+                                       </tr>
+                                       <tr>
+                                          <th>Friends</th>
+                                          <td>00:40:00</td>
+                                          <td>Comedia</td>
+                                       </tr>
+                                       <tr>
+                                          <th>The Big Bang Theory</th>
+                                          <td>00:40:00</td>
+                                          <td>Comedia</td>
+                                       </tr>
+                                       <tr>
+                                          <th>Criminal Minds</th>
+                                          <td>0s0:45:00</td>
+                                          <td>Drama Criminal</td>
+                                       </tr>
+                                       <tr>
+                                          <th>Dahmer</th>
+                                          <td>00:50:00</td>
+                                          <td>Drama Criminal</td>
+                                       </tr>
+                                    </tbody>
+                                 </table>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div><script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script></body>
+</html>
