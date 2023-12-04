@@ -1,20 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:tw="http://tecnologiasweb.com.mx" targetNamespace="http://tecnologiasweb.com.mx"
-    elementFormDefault="qualified" attributeFormDefault="unqualified" 
-    xmlns:xs="http://www.w3.org/2001/XMLSchema"> <!--los atributos deben de ser unqualifiedd pues
-    sino deberan de especificarse con el prefijo tambien, pero ya no tendria caso-->  
+    elementFormDefault="qualified" attributeFormDefault="unqualified"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <!--los atributos deben de ser unqualifiedd pues
+    sino deberan de especificarse con el prefijo tambien, pero ya no tendria caso-->
     <xs:complexType name="telefonoType">
         <xs:simpleContent>
             <xs:extension base="xs:string">
-                <xs:attribute name="tipo" type="xs:string" use="required" />
+                <xs:attribute name="tipo" type="xs:string" use="required"/>
             </xs:extension>
         </xs:simpleContent>
     </xs:complexType>
     <!-- Se define un tipo de elemento, es el elemento 0 -->
     <xs:complexType name="cuentaType">
         <xs:sequence>
-            <xs:element name="Nombre" type="xs:string" />
-            <xs:element name="Correo" type="xs:string" />
+            <xs:element name="Nombre" type="xs:string"/>
+            <xs:element name="Correo" type="xs:string"/>
             <xs:element name="Telefono" minOccurs="0" type="tw:telefonoType"/>
         </xs:sequence>
         <xs:attribute name="id" type="xs:string" use="required"/>
